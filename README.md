@@ -1,6 +1,6 @@
-# docker-rsnapshot
+# dind
 
-[rsnapshot](http://rsnapshot.org/) docker images
+docker-inside-docker images
 
 ## Build
 
