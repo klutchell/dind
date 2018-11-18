@@ -2,7 +2,7 @@
 
 # set timezone with TZ
 # eg. TZ=America/Toronto
-sudo ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+sudo ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && sudo echo $TZ > /etc/timezone
 
 # generate ssh key if one does not exist	
 if [ ! -f "${HOME}/.ssh/id_rsa" ]	
