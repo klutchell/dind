@@ -2,7 +2,13 @@
 
 # set timezone with TZ
 # eg. TZ=America/Toronto
-ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+sudo ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# generate ssh key if one does not exist	
+if [ ! -f "${HOME}/.ssh/id_rsa" ]	
+then	
+	ssh-keygen -q -N '' -f "${HOME}/.ssh/id_rsa"	
+fi
 
 # if a github username was provided and authorized_keys does not exist
 if [ ! -f "${HOME}/.ssh/authorized_keys" ] && [ -n "${GITHUB_USER}" ]
