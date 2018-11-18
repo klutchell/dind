@@ -5,14 +5,27 @@ docker-in-docker images with an ssh & textmate server
 ## Build
 
 ```bash
-# build for x86_64
+# build x86_64 image
 make
 
-# build for armhf
+# build armhf image
 make armhf
 ```
 
 ## Deploy
+
+```bash
+# push x86_64 image
+make push
+
+# push armhf image
+make push-armhf
+
+# tag release
+make tag
+```
+
+## Usage
 
 ```bash
 docker run -d \
@@ -33,10 +46,6 @@ docker run -d \
 |`TZ`|(optional) set container timezone|`America/Toronto`|
 |`GITHUB_USER`|(optional) sync authorized_keys with github|`klutchell`|
 |`DIND_OPTS`|(optional) docker daemon command line options|`--storage-driver aufs`|
-
-## Usage
-
-_tbd_
 
 ## Author
 
