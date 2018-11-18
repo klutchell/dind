@@ -21,7 +21,7 @@ make push
 # push armhf image
 make push-armhf
 
-# tag release
+# tag release version
 make tag
 ```
 
