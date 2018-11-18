@@ -2,7 +2,8 @@
 
 # set timezone with TZ
 # eg. TZ=America/Toronto
-sudo ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && sudo echo $TZ > /etc/timezone
+sudo ln -snf "/usr/share/zoneinfo/${TZ}" /etc/localtime
+echo "${TZ}" | sudo tee /etc/timezone
 
 # set permissions on ssh dir
 [ ! -d "${HOME}/.ssh" ] && mkdir "${HOME}/.ssh"
