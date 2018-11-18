@@ -20,5 +20,4 @@ fi
 sudo /usr/sbin/sshd -p 22 -D &
 
 # start docker daemon in the foreground
-# sudo /usr/bin/dockerd ${DIND_OPTS}
-/bin/bash
+sudo /usr/bin/dockerd ${DIND_OPTS}

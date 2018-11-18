@@ -15,7 +15,6 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 	bash-completion \
 	build-essential \
 	ca-certificates \
-	cgroupfs-mount \
 	curl \
 	git \
 	gnupg2 \

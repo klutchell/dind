@@ -30,8 +30,9 @@ docker run -d \
 
 |Name|Description|Example|
 |---|---|---|
-|`TZ`|(optional) container timezone|`America/Toronto`|
+|`TZ`|(optional) set container timezone|`America/Toronto`|
 |`GITHUB_USER`|(optional) sync authorized_keys with github|`klutchell`|
+|`DIND_OPTS`|(optional) docker daemon command line options|`--storage-driver aufs`|
 
 ## Usage
 
