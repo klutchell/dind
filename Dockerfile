@@ -56,7 +56,7 @@ RUN adduser --disabled-password --gecos '' dind \
 USER dind
 
 # work in home dir
-WORKDIR /home/dind/workspace
+WORKDIR /home/dind
 
 # expose ssh port
 EXPOSE 22

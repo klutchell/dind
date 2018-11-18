@@ -21,6 +21,8 @@ docker run -d \
     --privileged \
     -p '2222:22/tcp' \
     -v 'dind-home:/home/dind' \
+    -e 'TZ=America/Toronto' \
+    -e 'GITHUB_USER=klutchell' \
     klutchell/dind
 ```
 
@@ -29,6 +31,7 @@ docker run -d \
 |Name|Description|Example|
 |---|---|---|
 |`TZ`|(optional) container timezone|`America/Toronto`|
+|`GITHUB_USER`|(optional) sync authorized_keys with github|`klutchell`|
 
 ## Usage
 
