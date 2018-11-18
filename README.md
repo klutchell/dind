@@ -1,64 +1,38 @@
-# dind
+# docker-in-docker
 
-docker-inside-docker images
+docker-in-docker images with an ssh & textmate server
 
 ## Build
 
 ```bash
-make build ARCH=armhf
+# build for x86_64
+make
+
+# build for armhf
+make armhf
 ```
 
 ## Deploy
 
 ```bash
-docker run --name rsnapshot \
---privileged \
--e TZ=America/Toronto \
-klutchell/rsnapshot:armhf-latest
+docker run -d \
+    --name dind \
+    --restart unless-stopped \
+    --privileged \
+    -p '2222:22/tcp' \
+    -v 'dind-home:/home/dind' \
+    klutchell/dind
 ```
 
-## Parameters
+## Environment
 
-* `-e TZ=America/Toronto` - local timezone
+|Name|Description|Example|
+|---|---|---|
+|`TZ`|(optional) container timezone|`America/Toronto`|
 
 ## Usage
 
-* format a storage device with `LABEL=snapshots`
-
-```bash
-# fdisk example
-fdisk /dev/sda
-d
-n
-w
-mkfs.ext4 /dev/sda1 -L snapshots
-```
-
-* specify backup points by setting environment variables
-prefixed with `RSNAPSHOT_CONF_`
-
-```bash
-docker run --name rsnapshot \
---privileged \
--e TZ=America/Toronto \
--e RSNAPSHOT_CONF_local1="backup /home/ localhost/" \
--e RSNAPSHOT_CONF_local2="backup /etc/ localhost/" \
--e RSNAPSHOT_CONF_local3="backup /usr/local/ localhost/" \
--e RSNAPSHOT_CONF_pi="backup pi@192.168.1.101:/home/ 192.168.1.101/" \
--e RSNAPSHOT_CONF_ex1="exclude media/movies" \
--e RSNAPSHOT_CONF_ex2="exclude media/tv" \
-klutchell/rsnapshot:armhf-latest
-```
-
-* adjust the schedules in `/usr/src/app/crontab`
-
-```
-# defaults:
-alpha:	Every 4 hours
-beta:	At 03:30 AM
-gamma:	At 03:00 AM, only on Monday
-delta:	At 02:30 AM, on day 1 of the month
-```
+_tbd_
 
 ## Author
 
@@ -66,8 +40,8 @@ Kyle Harding <kylemharding@gmail.com>
 
 ## License
 
-_tbd_
+[MIT License](./LICENSE)
 
 ## Acknowledgments
 
-* https://github.com/resin-io-playground/cron-example
+_tbd_
