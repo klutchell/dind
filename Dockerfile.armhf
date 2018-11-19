@@ -4,7 +4,7 @@ ARG BUILD_DATE
 ARG BUILD_VERSION
 
 LABEL build_version="${BUILD_VERSION}"
-LABEL build_date="${BUILD_DATE}"
+LABEL build_date="${BUILD_DATE:-$(date)}"
 LABEL maintainer="kylemharding@gmail.com"
 
 # start cross-build
@@ -19,7 +19,6 @@ ENV DEBIAN_FRONTEND noninteractive
 # install updates and common utilities
 RUN apt-get update && apt-get install -yq --no-install-recommends \
 	apt-transport-https \
-	aufs-tools \
 	bash-completion \
 	build-essential \
 	ca-certificates \
@@ -29,19 +28,9 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 	openssh-server \
 	software-properties-common \
 	sudo \
-	tmux \
 	tzdata \
-	wget \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# disable ssh password auth
-RUN sed -r \
-	-e 's/^(#)?PasswordAuthentication .+$/PasswordAuthentication no/' \
-	-i /etc/ssh/sshd_config
-
-# create privilege separation directory
-RUN mkdir /run/sshd
 
 # install docker
 RUN curl -fsSL https://get.docker.com | sh \
@@ -51,14 +40,20 @@ RUN curl -fsSL https://get.docker.com | sh \
 # use volume for docker graph
 VOLUME /var/lib/docker
 
+# disable ssh password auth
+RUN sed -r \
+	-e 's/^(#)?PasswordAuthentication .+$/PasswordAuthentication no/' \
+	-i /etc/ssh/sshd_config
+
+# create privilege separation directory
+RUN mkdir /run/sshd
+
 # install rmate
 RUN curl -fsSL https://raw.githubusercontent.com/aurora/rmate/master/rmate -o /usr/local/bin/rmate \
 	&& chmod a+x /usr/local/bin/rmate
 
 # create user account
-RUN adduser --disabled-password --gecos '' dind \
-	&& adduser dind sudo \
-	&& adduser dind docker \
+RUN useradd -ms /bin/bash -G sudo,docker dind \
 	&& echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # end cross-build
