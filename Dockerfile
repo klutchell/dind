@@ -4,7 +4,7 @@ ARG BUILD_DATE
 ARG BUILD_VERSION
 
 LABEL build_version="${BUILD_VERSION}"
-LABEL build_date="${BUILD_DATE:-$(date)}"
+LABEL build_date="${BUILD_DATE}"
 LABEL maintainer="kylemharding@gmail.com"
 
 # default timezone
