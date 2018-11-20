@@ -35,7 +35,6 @@ docker run -d \
     -p '2222:22/tcp' \
     -v 'dind-home:/home/dind' \
     -e 'TZ=America/Toronto' \
-    -e 'GITHUB_USER=klutchell' \
     klutchell/dind
 ```
 
@@ -44,8 +43,6 @@ docker run -d \
 |Name|Description|Example|
 |---|---|---|
 |`TZ`|(optional) set container timezone|`America/Toronto`|
-|`GITHUB_USER`|(optional) sync authorized_keys with github|`klutchell`|
-|`DIND_OPTS`|(optional) docker daemon command line options|`--storage-driver aufs`|
 
 ## Author
 
