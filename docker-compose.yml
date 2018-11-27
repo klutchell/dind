@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-
     dind:
         build: .
         container_name: 'dind'
@@ -12,9 +11,7 @@ services:
             - 'dind:/home/dind'
         environment:
             - 'TZ=America/Toronto'
-            - 'GITHUB_USER=klutchell'
         privileged: true
 
 volumes:
-
     dind:
